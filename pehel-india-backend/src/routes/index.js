@@ -46,7 +46,7 @@ const Report = new ReportModel({ ...values, location: { coordinates: values.loca
 
 		const Reports = await ReportModel.paginate({
 			createdBy: req.session.user._id
-		}, { page, limit, populate: "createdBy" });
+		}, { page, limit, populate: ["createdBy", "category"] });
 
 		Reports.docs = Reports.docs.map(doc => {
 			doc.createdBy = _.pick(doc.createdBy, ['name', 'phoneNo', 'type'])
