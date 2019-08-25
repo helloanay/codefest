@@ -15,7 +15,22 @@
   			</v-card>
   			</v-flex>
   		</v-layout>
-  		<v-layout></v-layout>
+  		<v-layout>
+                        <v-flex xs12>
+        <v-list>
+
+        
+            <v-list-item v-for="(item, idx) in items.docs" :key="item.id" @click="">
+
+                  <v-list-item-content>
+                    <v-list-item-title>{{idx+1}}. Category: {{item.category.name}}, Description: {{item.desc}}, Created At: {{new Date(item.createdAt).toString().slice(7, 20)}} </v-list-item-title>
+                  </v-list-item-content>
+
+            </v-list-item>
+          
+        </v-list> 
+                      </v-flex>       
+      </v-layout>
   	</v-container>
   </div>
 </template>
@@ -29,7 +44,23 @@
 </style>
 
 <script type="text/javascript">
+  import axios from 'axios';
 	export default {
-	props: ["user"]
+	props: ["user"],
+    data() {
+      return {
+        items: []
+      }
+    },
+    methods: {
+      async getReports() {
+        let res = await axios.get("http://localhost:3000/get-my-reports?limit=20&page=1", { withCredentials: true });
+
+        this.items = res.data;
+      }
+    },
+    mounted() {
+      this.getReports();
+    }
 	}
 </script>

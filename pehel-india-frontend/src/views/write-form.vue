@@ -66,7 +66,7 @@ export default {
 			e.preventDefault();
 			const form = { desc: this.desc, location: [this.position.coords.latitude, this.position.coords.longitude], photo: this.photo, category: this.category};
 
-			const res = await axios.post("http://localhost:3000./report", form, {
+			const res = await axios.post("http://localhost:3000/report", form, {
 				withCredentials: true
 			});
 
