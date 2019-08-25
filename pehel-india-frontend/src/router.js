@@ -23,6 +23,11 @@ export default new Router({
 
     },
     {
+      path: "/news",
+      name: 'news',
+      component: () => import('./views/news.vue')
+    },
+    {
       path: '/report/write',
       name: 'write-report',
       // route level code-splitting
